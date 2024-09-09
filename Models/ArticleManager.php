@@ -27,10 +27,10 @@ class ArticleManager extends AbstractEntityManager
 		$order = strtolower($order) === 'desc' ? 'desc' : 'asc';
 
 		$sql = "
-        SELECT a.id, a.title, a.views, a.date_creation, 
-               (SELECT COUNT(c.id) FROM comment c WHERE c.id_article = a.id) AS comment_count
-        FROM article a
-        ORDER BY $sort $order";
+        	SELECT a.id, a.title, a.views, a.date_creation, 
+        	(SELECT COUNT(c.id) FROM comment c WHERE c.id_article = a.id) AS comment_count
+        	FROM article a
+        	ORDER BY $sort $order";
 
 		$result = $this->db->query($sql);
 		$articles = [];
