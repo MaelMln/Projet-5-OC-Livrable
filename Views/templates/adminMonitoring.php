@@ -4,23 +4,23 @@
     <thead>
     <tr>
         <th>
-            <a href="?action=admin&sort=title&order=<?= $sort === 'title' && $order === 'asc' ? 'desc' : 'asc' ?>">
-                <div class="clickable-cell">Titre</div>
+            <a href="?action=adminMonitoring&sort=title&order=<?= $sort === 'title' && $order === 'asc' ? 'desc' : 'asc' ?>">
+                Titre <?= $sort === 'title' ? ($order === 'asc' ? '▲' : '▼') : '' ?>
             </a>
         </th>
         <th>
-            <a href="?action=admin&sort=views&order=<?= $sort === 'views' && $order === 'asc' ? 'desc' : 'asc' ?>">
-                <div class="clickable-cell">Nombre de vues</div>
+            <a href="?action=adminMonitoring&sort=views&order=<?= $sort === 'views' && $order === 'asc' ? 'desc' : 'asc' ?>">
+                Nombre de vues <?= $sort === 'views' ? ($order === 'asc' ? '▲' : '▼') : '' ?>
             </a>
         </th>
         <th>
-            <a href="?action=admin&sort=comment_count&order=<?= $sort === 'comment_count' && $order === 'asc' ? 'desc' : 'asc' ?>">
-                <div class="clickable-cell">Nombre de commentaires</div>
+            <a href="?action=adminMonitoring&sort=comment_count&order=<?= $sort === 'comment_count' && $order === 'asc' ? 'desc' : 'asc' ?>">
+                Nombre de commentaires <?= $sort === 'comment_count' ? ($order === 'asc' ? '▲' : '▼') : '' ?>
             </a>
         </th>
         <th>
-            <a href="?action=admin&sort=date_creation&order=<?= $sort === 'date_creation' && $order === 'asc' ? 'desc' : 'asc' ?>">
-                <div class="clickable-cell">Date de publication</div>
+            <a href="?action=adminMonitoring&sort=date_creation&order=<?= $sort === 'date_creation' && $order === 'asc' ? 'desc' : 'asc' ?>">
+                Date de publication <?= $sort === 'date_creation' ? ($order === 'asc' ? '▲' : '▼') : '' ?>
             </a>
         </th>
     </tr>

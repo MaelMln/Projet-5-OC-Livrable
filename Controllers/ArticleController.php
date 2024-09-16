@@ -11,7 +11,7 @@ use Exception;
 class ArticleController
 {
 	/**
-	 * Affiche la page d'accueil.
+	 * Affiche la page d'accueil avec la liste des articles.
 	 * @return void
 	 */
 	public function showHome(): void
@@ -24,8 +24,9 @@ class ArticleController
 	}
 
 	/**
-	 * Affiche le détail d'un article.
+	 * Affiche le détail d'un article spécifique.
 	 * @return void
+	 * @throws Exception si l'article n'existe pas.
 	 */
 	public function showArticle(): void
 	{
@@ -46,7 +47,7 @@ class ArticleController
 	}
 
 	/**
-	 * Affiche le formulaire d'ajout d'un article.
+	 * Affiche le formulaire pour ajouter un nouvel article.
 	 * @return void
 	 */
 	public function addArticle(): void
@@ -56,7 +57,7 @@ class ArticleController
 	}
 
 	/**
-	 * Affiche la page "à propos".
+	 * Affiche la page "À propos".
 	 * @return void
 	 */
 	public function showApropos(): void

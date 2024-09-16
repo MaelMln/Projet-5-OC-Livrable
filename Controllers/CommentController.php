@@ -11,8 +11,12 @@ use Exception;
 class CommentController
 {
 	/**
-	 * Ajoute un commentaire.
+	 * Ajoute un commentaire à un article.
+	 * Récupère les données du formulaire, vérifie que l'article existe,
+	 * crée un objet Comment et l'ajoute à la base de données.
+	 * Redirige ensuite vers l'article.
 	 * @return void
+	 * @throws Exception si des champs sont manquants ou si l'article n'existe pas.
 	 */
 	public function addComment(): void
 	{
@@ -21,7 +25,7 @@ class CommentController
 		$idArticle = Utils::request("idArticle");
 
 		if (empty($pseudo) || empty($content) || empty($idArticle)) {
-			throw new Exception("Tous les champs sont obligatoires. 3");
+			throw new Exception("Tous les champs sont obligatoires.");
 		}
 
 		$articleManager = new ArticleManager();

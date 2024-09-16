@@ -22,8 +22,8 @@ class DBManager
 	private function __construct()
 	{
 		$this->db = new \PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8', DB_USER, DB_PASS);
-		$this->db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);  // Utilisation de \PDO pour la classe native
-		$this->db->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);  // Utilisation de \PDO pour la classe native
+		$this->db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+		$this->db->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
 	}
 
 	/**
@@ -57,11 +57,21 @@ class DBManager
 	public function query(string $sql, ?array $params = null): \PDOStatement
 	{
 		if ($params == null) {
-			$query = $this->db->query($sql);
+			return $this->db->query($sql);
 		} else {
-			$query = $this->db->prepare($sql);
-			$query->execute($params);
+			$stmt = $this->db->prepare($sql);
+			$stmt->execute($params);
+			return $stmt;
 		}
-		return $query;
+	}
+
+	/**
+	 * Méthode qui permet de préparer une requête SQL sans l'exécuter (pour des requêtes préparées).
+	 * @param string $sql : la requête SQL à préparer.
+	 * @return \PDOStatement : la requête SQL préparée.
+	 */
+	public function prepare(string $sql): \PDOStatement
+	{
+		return $this->db->prepare($sql);
 	}
 }

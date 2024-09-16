@@ -434,8 +434,10 @@ tbody tr:hover {
 }
 
 .admin-monitoring-table th a {
-    color: #333;
     text-decoration: none;
+    color: #333;
+    position: relative;
+    padding-right: 15px;
 }
 
 .admin-monitoring-table th a:hover {
@@ -448,4 +450,21 @@ tbody tr:hover {
 
 .admin-monitoring-table tbody tr:hover {
     background-color: var(--hoverRowColor);
+}
+
+.admin-monitoring-table th a:after {
+    content: "";
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 12px;
+}
+
+.admin-monitoring-table th a.asc:after {
+    content: "▲";
+}
+
+.admin-monitoring-table th a.desc:after {
+    content: "▼";
 }

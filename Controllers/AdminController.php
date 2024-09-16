@@ -10,6 +10,25 @@ use App\Views\View;
 
 class AdminController
 {
+	/**
+	 * Affiche le tableau de gestion des articles pour l'administrateur.
+	 * @return void
+	 */
+	public function showAdminPanel(): void
+	{
+		$this->checkIfUserIsConnected();
+
+		$articleManager = new ArticleManager();
+		$articles = $articleManager->getAllArticles();
+
+		$view = new View("Administration");
+		$view->render("admin", ['articles' => $articles]);
+	}
+
+	/**
+	 * Affiche le tableau de monitoring des articles avec des statistiques.
+	 * @return void
+	 */
 	public function showAdminMonitoring(): void
 	{
 		$this->checkIfUserIsConnected();
@@ -24,7 +43,11 @@ class AdminController
 		$view->render("adminMonitoring", ['articles' => $articles, 'sort' => $sort, 'order' => $order]);
 	}
 
-
+	/**
+	 * Vérifie si un utilisateur est connecté.
+	 * Redirige vers la page de connexion si non connecté.
+	 * @return void
+	 */
 	private function checkIfUserIsConnected(): void
 	{
 		if (!isset($_SESSION['user'])) {
@@ -32,12 +55,21 @@ class AdminController
 		}
 	}
 
+	/**
+	 * Affiche le formulaire de connexion pour les utilisateurs.
+	 * @return void
+	 */
 	public function displayConnectionForm(): void
 	{
 		$view = new View("Connexion");
 		$view->render("connectionForm");
 	}
 
+	/**
+	 * Gère la connexion d'un utilisateur.
+	 * @return void
+	 * @throws \Exception si les identifiants sont incorrects.
+	 */
 	public function connectUser(): void
 	{
 		$login = Utils::request("login");
@@ -63,12 +95,21 @@ class AdminController
 		Utils::redirect("admin");
 	}
 
+	/**
+	 * Déconnecte l'utilisateur actuellement connecté.
+	 * Redirige vers la page d'accueil après déconnexion.
+	 * @return void
+	 */
 	public function disconnectUser(): void
 	{
 		unset($_SESSION['user']);
 		Utils::redirect("home");
 	}
 
+	/**
+	 * Affiche le formulaire pour modifier ou créer un article.
+	 * @return void
+	 */
 	public function showUpdateArticleForm(): void
 	{
 		$this->checkIfUserIsConnected();
@@ -86,6 +127,11 @@ class AdminController
 		$view->render("updateArticleForm", ['article' => $article]);
 	}
 
+	/**
+	 * Met à jour ou ajoute un nouvel article.
+	 * @return void
+	 * @throws \Exception si des champs requis sont manquants.
+	 */
 	public function updateArticle(): void
 	{
 		$this->checkIfUserIsConnected();
@@ -121,6 +167,11 @@ class AdminController
 		Utils::redirect("admin");
 	}
 
+	/**
+	 * Supprime un article par son ID.
+	 * Redirige vers la page d'administration après suppression.
+	 * @return void
+	 */
 	public function deleteArticle(): void
 	{
 		$this->checkIfUserIsConnected();
@@ -133,6 +184,11 @@ class AdminController
 		Utils::redirect("admin");
 	}
 
+	/**
+	 * Supprime un commentaire par son ID.
+	 * Redirige vers l'article ou la page d'accueil après suppression.
+	 * @return void
+	 */
 	public function deleteComment(): void
 	{
 		$this->checkIfUserIsConnected();
@@ -151,5 +207,4 @@ class AdminController
 			Utils::redirect("home");
 		}
 	}
-
 }
